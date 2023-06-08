@@ -2,7 +2,7 @@ package com.gmail.valeriipiliaiev;
 
 import java.util.Objects;
 
-public class Point {
+public class Point implements Cloneable {
     private int x;
     private int y;
 
@@ -66,7 +66,11 @@ public class Point {
 
     @Override
     public Point clone() {
-        return new Point(this.x, this.y);
+        try {
+            return (Point) super.clone();
+        } catch (CloneNotSupportedException e) {
+            return new Point(this.x, this.y);
+        }
     }
 
     public Point(Point other) {
