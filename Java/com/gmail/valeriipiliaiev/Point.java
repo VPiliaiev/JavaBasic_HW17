@@ -1,5 +1,7 @@
 package com.gmail.valeriipiliaiev;
 
+import java.util.Objects;
+
 public class Point {
     private int x;
     private int y;
@@ -32,13 +34,26 @@ public class Point {
     }
 
     public static double calculateDistanceBetween(Point firstPoint, Point secondPoint) {
-        double distanceX = secondPoint.x - firstPoint.x;
-        double distanceY = secondPoint.y - firstPoint.y;
-        return Math.sqrt(distanceX * distanceX + distanceY * distanceY);
+        return firstPoint.calculateDistance(secondPoint);
     }
 
-    public boolean isEqualTo(Point other) {
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        Point other = (Point) obj;
         return this.x == other.getX() && this.y == other.getY();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 
     @Override
